@@ -5,7 +5,6 @@
 | Instance | Nodes | Best PPO Score (Ours) | Best Known (Public/Observed) | Gap (%) | Notes |
 |----------|-------|----------------------|------------------------------|---------|-------|
 | d1291 | 1,291 | **51,646** | 51,827 *(observed, non-exhaustive)* | **-0.35%** | PPO-only, on-instance |
-| gr431 | 431 | **171,702** | 171,414 *(optimal)* | +0.17% | PPO-only, on-instance |
 
 > **중요 공지 (정확성/검증 관련)**
 > 
