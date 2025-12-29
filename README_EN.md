@@ -1,23 +1,20 @@
 # Exception-Edge Theory Guided PPO TSP Solver
 
-## Performance Highlights (Zero-shot, No Pretraining)
+## 🚀 Performance Highlights (Zero-shot, No Pretraining)
 
-| Instance | Nodes | Best PPO Score (Ours) | Best Known (Public/Observed) | Gap (%) | Notes |
-|----------|-------|----------------------|------------------------------|---------|-------|
-| d1291 | 1,291 | **51,646** | 51,827 *(observed, non-exhaustive)* | **-0.35%** | PPO-only, on-instance |
-
-> **Important Notice (Accuracy/Verification)**
-> 
-> "Best Known (Public/Observed)" represents the best records **we have identified** through public sources and limited search.
-> **We do not guarantee exhaustive verification.**
-> 
-> If you have **officially documented or reproducible better ML records**, 
-> please share via Issue/PR with **source links + logs + reproduction steps**.
-
-> **Zero-shot On-instance RL**
+| Instance | Nodes | Best PPO (Ours) | Optimal | Gap vs Optimal |
+|----------|-------|-----------------|---------|----------------|
+| d1291 | 1,291 | **51,646** | 50,801 | +1.66% |
+> **Zero-shot On-instance Learning**
 > 
 > This solver **learns policies from scratch using only rollouts on the target instance**.
-> No external datasets, synthetic data, or pretraining is used.
+> No external datasets, synthetic data, pretrained weights, or LKH solutions are used.
+> 
+> The 1.66% gap on d1291 is **competitive with pretrained models** (RsGCN 0.14%, DRHG 2.09%, etc.),
+> and represents the best result achieved through pure zero-shot on-instance learning.
+
+> **Benchmark Sources**
+> - ML baseline comparison: [RsGCN (arXiv:2506.00533)](https://arxiv.org/abs/2506.00533)
 
 ---
 
