@@ -9,7 +9,7 @@
 > **Important Notice (Accuracy/Verification)**
 > 
 > "Best Known (Public/Observed)" represents the best records **we have identified** through public sources and limited search.
-> **We do not guarantee exhaustive verification or official SOTA certification.**
+> **We do not guarantee exhaustive verification.**
 > 
 > If you have **officially documented or reproducible better ML records**, 
 > please share via Issue/PR with **source links + logs + reproduction steps**.
