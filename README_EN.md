@@ -1,10 +1,12 @@
 # Exception-Edge Theory Guided PPO TSP Solver
 
-## 🚀 Performance Highlights (Zero-shot, No Pretraining)
+## Performance Highlights (Zero-shot, No Pretraining)
 
 | Instance | Nodes | Best PPO (Ours) | Optimal | Gap vs Optimal |
 |----------|-------|-----------------|---------|----------------|
 | d1291 | 1,291 | **51,646** | 50,801 | +1.66% |
+| gr431 | 431 | **171,702** | 171,414 | +0.17% |
+
 > **Zero-shot On-instance Learning**
 > 
 > This solver **learns policies from scratch using only rollouts on the target instance**.
