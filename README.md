@@ -1,6 +1,6 @@
 # Exception-Edge Theory Guided PPO TSP Solver
 
-## 🚀 성능 하이라이트 (Zero-shot, No Pretraining)
+## 성능 하이라이트 (Zero-shot, No Pretraining)
 
 | Instance | Nodes | Best PPO Score (Ours) | Best Known (Public/Observed) | Gap (%) | Notes |
 |----------|-------|----------------------|------------------------------|---------|-------|
@@ -263,7 +263,7 @@ exception-edge-tsp/
 
 ## 8. 라이선스
 
-- **코드**: MIT License
+- **코드**: Apache License 2.0
 - **데이터**: TSPLIB/공개 인스턴스는 각 출처의 정책을 따릅니다.
 
 ---
