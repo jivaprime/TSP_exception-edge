@@ -1,7 +1,7 @@
 # Exception-Edge Theory Guided PPO TSP Solver
 
 
-## 🚀 Performance Highlights (Zero-shot, No Pretraining)
+## Performance Highlights (Zero-shot, No Pretraining)
 
 | Instance | Nodes | Best PPO (Ours) | Optimal | Gap vs Optimal |
 |----------|-------|-----------------|---------|----------------|
