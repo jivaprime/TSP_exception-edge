@@ -5,7 +5,6 @@
 | Instance | Nodes | Best PPO Score (Ours) | Best Known (Public/Observed) | Gap (%) | Notes |
 |----------|-------|----------------------|------------------------------|---------|-------|
 | d1291 | 1,291 | **51,646** | 51,827 *(observed, non-exhaustive)* | **-0.35%** | PPO-only, on-instance |
-| gr431 | 431 | **171,702** | 171,414 *(optimal)* | +0.17% | PPO-only, on-instance |
 
 > **Important Notice (Accuracy/Verification)**
 > 
@@ -257,14 +256,13 @@ exception-edge-tsp/
 │   └── d1291_ppo_log.txt  # Experiment log
 └── data/
     ├── d1291.tsp          # Test instance
-    └── gr431.tsp
 ```
 
 ---
 
 ## 8. License
 
-- **Code**: MIT License
+- **Code**: Apache License 2.0
 - **Data**: TSPLIB/public instances follow their respective source policies.
 
 ---
@@ -289,111 +287,7 @@ exception-edge-tsp/
 3. **Zero-shot Learning**: Competitive performance on single instances without pretraining
 4. **Interpretability**: Explicit answers to "why is this edge important?"
 
----
-
-## 11. Theoretical Deep Dive
-
-### 11.1 Why Exception Edges Matter
-
-In Euclidean TSP, the optimal tour predominantly uses edges from the Delaunay triangulation or k-nearest neighbor graph. However, a small subset of edges—**exception edges**—violate this pattern:
-
-```
-Optimal Tour Edges = Bulk Edges (local mesh) + Exception Edges (bridges)
-```
-
-The number of exception edges scales as O(n^(2/3)) for uniform distributions, but their identification is the computational bottleneck.
-
-### 11.2 The Rarity Argument
-
-For a random edge (u,v), the probability it appears in the optimal tour depends on:
-
-1. **Detour availability**: If many short detours exist, (u,v) is unlikely optimal
-2. **Ellipse mass**: M_τ(u,v) counts potential detour points
-
-When M_τ ≥ c·log(n), union bounds guarantee:
-
-```
-P(edge (u,v) is optimal | M_τ ≥ c·log(n)) ≤ n^(-c')
-```
-
-This enables pruning of most edge candidates while preserving optimality with high probability.
-
-### 11.3 Breaking the No-Go: Thickness Condition
-
-Non-homogeneous distributions can create bottlenecks where M_τ → O(1), breaking rarity control. The **thickness condition** ensures:
-
-```
-For all relevant ellipses E(u,v; η):
-  Area(E ∩ D_τ) ≥ δ · Area(E)  for some δ > 0
-```
-
-This geometrically excludes pathological corridors and restores the O(log n) mass guarantee.
-
-### 11.4 Micro vs Macro Classification
-
-| Type | Criterion | Origin | Handling |
-|------|-----------|--------|----------|
-| **Micro** | ρ > 1 + η | Local void | Rarity-controlled |
-| **Macro** | M_τ < threshold, long edge | Global bottleneck | Structure-forced |
-
-The v4.1 length-gating ensures only genuinely long edges trigger macro classification:
-
-```python
-# Short edges: ignore mass (false positives in dense regions)
-# Long edges: mass matters (true macro-bridges)
-is_macro = (norm_length >= long_threshold) and (mass < mass_threshold)
-```
-
----
-
-## 12. Comparison with Existing Approaches
-
-| Method | Pretraining | Generalization | Interpretability | Our Gap |
-|--------|-------------|----------------|------------------|---------|
-| Attention Model (AM) | Millions of instances | Distribution-specific | Black-box | - |
-| POMO | Millions of instances | Distribution-specific | Black-box | - |
-| EAS | Hundreds of instances | Moderate | Limited | - |
-| **Ours** | **None (zero-shot)** | **Structure-based** | **Theory-guided** | **-0.35%** |
-
-### Key Differentiators
-
-1. **No distribution assumption**: Works on any instance geometry
-2. **On-instance learning**: Adapts to specific problem structure
-3. **Theoretical grounding**: Exception edge theory guides search
-4. **Interpretable decisions**: "Why this edge?" has explicit geometric answer
-
----
-
-## 13. Limitations and Future Work
-
-### Current Limitations
-
-- **Computational cost**: Slower than pure heuristics for small instances
-- **Scaling**: Not yet tested beyond n=5000
-- **Guarantee**: No formal optimality bounds (empirical validation only)
-
-### Future Directions
-
-1. **Formal proofs**: Rigorous analysis of scaling law constants
-2. **Larger instances**: Hierarchical decomposition for n>10000
-3. **Other problems**: Extension to CVRP, VRPTW, etc.
-4. **Hybrid approaches**: Integration with LKH-style moves
-
----
-
-## 14. FAQ
-
-**Q: How does this compare to LKH-3?**
-
-A: LKH-3 remains superior for pure solution quality. Our contribution is theoretical—explaining *why* certain edges matter and demonstrating that theory-guided RL can achieve competitive results without pretraining.
-
-**Q: Can I use this for production?**
-
-A: For production TSP solving, we recommend established solvers (Concorde, LKH-3, OR-Tools). This project is primarily a research contribution demonstrating theory-guided NCO.
-
-**Q: Why single-instance learning?**
-
-A: We believe understanding *why* a method works on individual instances is prerequisite to reliable generalization. Many pretrained models fail on out-of-distribution instances precisely because they lack this structural understanding.
+understanding.
 
 **Q: What makes an edge an "exception"?**
 
