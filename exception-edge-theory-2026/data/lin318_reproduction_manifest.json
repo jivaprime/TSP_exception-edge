@@ -1,0 +1,48 @@
+{
+  "schema": "lin318-compact-reproduction-bundle-v1",
+  "created_utc": "2026-07-29",
+  "archive": "lin318_reproduction_inputs.zip",
+  "archive_sha256": "866814761d1bc6d73bf14eb7fb7837c4bf1a24e82b462cba6cc5a705188df259",
+  "original_colab_archive_sha256": "06ab01ad86cfac20da267336e9f33be088f93a358f1863d117fc739eaa6e0d29",
+  "selection_policy": "allowlist_only_preserve_internal_paths",
+  "members": [
+    {
+      "path": "benchmark_pilot/runs/weak_only__r01/solver_output/candidate_edges/round_00.csv",
+      "bytes": 27211,
+      "sha256": "665b36426522c5f472839eae5c12e7a5354a3c3765d95f020d5a6bb471a12ca9"
+    },
+    {
+      "path": "benchmark_pilot/runs/weak_only__r01/solver_output/blind_solver_seal.json",
+      "bytes": 1590,
+      "sha256": "9b82df3309a7c26b1a51a7efb38cb692f1bc8898f9bbc78f4a893197ce3d4579"
+    },
+    {
+      "path": "benchmark_pilot/runs/static_local_b512__r01/solver_output/candidate_edges/round_00.csv",
+      "bytes": 42891,
+      "sha256": "aa75561a53100148eb69b45fef04bd690e5b0f7a0db9d8a573b85ecb1d3d4a69"
+    },
+    {
+      "path": "benchmark_pilot/runs/static_local_b512__r01/solver_output/blind_solver_seal.json",
+      "bytes": 1590,
+      "sha256": "0818339ae089ff72700b39cdde6427d3543163d59eaaaad3112a1c367110f7cc"
+    },
+    {
+      "path": "benchmark_pilot/runs/static_nearest_b512__r01/solver_output/candidate_edges/round_00.csv",
+      "bytes": 42891,
+      "sha256": "aa75561a53100148eb69b45fef04bd690e5b0f7a0db9d8a573b85ecb1d3d4a69"
+    },
+    {
+      "path": "benchmark_pilot/runs/static_nearest_b512__r01/solver_output/blind_solver_seal.json",
+      "bytes": 1590,
+      "sha256": "fc6ef1afa3fb57963206cc236541d7a5c0f87c0e59ed7469c9d257d63a557059"
+    },
+    {
+      "path": "benchmark_pilot/runs/static_shortest_b512__r01/solver_output/milp_audit/round_00.json",
+      "bytes": 62228,
+      "sha256": "4a4a5b090a6cfcbf9b0b5e3e78479c99159347536a6aa77c62f332d2eb691d51"
+    }
+  ],
+  "contains_tsplib_source_problem": false,
+  "contains_lkh_binary": false,
+  "contains_optimum_tour": false
+}

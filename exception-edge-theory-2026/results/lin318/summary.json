@@ -1,0 +1,67 @@
+{
+  "schema": "exception-edge-lin318-public-summary-v1",
+  "problem": {
+    "name": "lin318",
+    "dimension": 318,
+    "edge_weight_type": "EUC_2D",
+    "complete_graph_edges": 50403,
+    "known_optimum_posthoc_only": 42029
+  },
+  "candidate_graph": {
+    "weak_delaunay_edges": 988,
+    "added_candidate_edges": 512,
+    "total_candidate_edges": 1500,
+    "fraction_of_complete_graph": 0.0297601333253973,
+    "generated_by_threshold_theory": false,
+    "static_local_equals_static_nearest_snapshot": true
+  },
+  "zero_base_pilot": {
+    "conditions": 15,
+    "no_cycle_found": 15,
+    "time_limit_seconds_per_main_condition": 60,
+    "summary_csv": "zero_base_pilot_summary.csv",
+    "summary_csv_sha256": "262745ca5c5abfeecd6d5ba5d2064552d205818c4889cf1c5e72967d4b0c3dd8"
+  },
+  "restricted_baseline": {
+    "integer_lower_bound": 42231,
+    "verified_feasible_upper_bound": 42231,
+    "exact": true
+  },
+  "threshold_scan": {
+    "rows": 512,
+    "verified_witnesses": 512,
+    "safe_positive_lower_bounds": 13,
+    "exact_kappa_computed": false,
+    "remaining_499_are_negative": false
+  },
+  "basin_experiment": {
+    "t0": 42210,
+    "best_safe_closure_seed": 42118,
+    "best_safe_closure_seed_edge_zero_based": [
+      88,
+      98
+    ],
+    "best_second_stage": 42108,
+    "second_stage_edge_zero_based": [
+      27,
+      102
+    ],
+    "best_inconclusive_top32_probe": 42108,
+    "uses_lkh_closure_seed": true,
+    "predeclared_holdout": false
+  },
+  "posthoc_comparison": {
+    "gap_to_known_optimum": 79,
+    "relative_gap": 0.0018796545242570606
+  },
+  "truth_isolation": {
+    "optimum_tour_read_for_selection": false,
+    "known_optimum_value_read_for_selection": false
+  },
+  "nonclaims": [
+    "not an LKH-free independent solver",
+    "not exact kappa recall",
+    "not a controlled causal edge effect",
+    "not a polynomial-time TSP solution"
+  ]
+}

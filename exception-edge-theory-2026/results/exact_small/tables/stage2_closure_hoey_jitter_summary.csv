@@ -1,0 +1,7 @@
+jitter_sigma,objective_mode,split,instance_count,topological_required_count,topological_required_rate,metric_surplus_count,metric_surplus_rate,mandatory_exception_count,mandatory_exception_rate,exception_count_tie_count,exception_count_tie_rate,mean_minimum_feasible_q,mean_optimal_q_min,mean_metric_surplus_min,lower_bound_exact_count,lower_bound_exact_rate
+0.002,euc_2d,validation,60,0,0.0,60,1.0,60,1.0,0,0.0,0.0,1.0,1.0,60,1.0
+0.002,euclidean_raw,validation,60,0,0.0,60,1.0,60,1.0,0,0.0,0.0,1.0,1.0,60,1.0
+0.01,euc_2d,validation,60,0,0.0,60,1.0,60,1.0,0,0.0,0.0,1.0,1.0,60,1.0
+0.01,euclidean_raw,validation,60,0,0.0,59,0.9833333333333333,59,0.9833333333333333,0,0.0,0.0,0.9833333333333333,0.9833333333333333,60,1.0
+0.05,euc_2d,validation,60,0,0.0,33,0.55,33,0.55,3,0.05,0.0,0.55,0.55,60,1.0
+0.05,euclidean_raw,validation,60,0,0.0,35,0.5833333333333334,35,0.5833333333333334,0,0.0,0.0,0.5833333333333334,0.5833333333333334,60,1.0

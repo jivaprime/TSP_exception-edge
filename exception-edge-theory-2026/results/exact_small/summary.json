@@ -1,0 +1,43 @@
+{
+  "schema": "exception-edge-exact-small-public-summary-v1",
+  "stage2": {
+    "coordinate_instances": 541,
+    "objectives_per_instance": [
+      "raw_euclidean",
+      "EUC_2D"
+    ],
+    "raw_mandatory_total": 178,
+    "raw_mandatory_q1": 177,
+    "raw_mandatory_q2": 1,
+    "nontargeted_family_instances": 360,
+    "nontargeted_raw_mandatory": 23,
+    "nontargeted_raw_mandatory_rate": 0.06388888888888888,
+    "general_population_prevalence_claim": false
+  },
+  "stage3_natural_core": {
+    "instances": 600,
+    "mandatory_instances": 51,
+    "exact_global_q1": 51,
+    "exact_exclusive_q1": 51,
+    "safe_certified_mandatory": 48,
+    "exact_beneficial_pairs": 98,
+    "safe_certified_beneficial_pairs": 88,
+    "all_nonbaseline_pairs": 15054,
+    "safe_support_superset_pairs": 644,
+    "exact_support_pairs": 600,
+    "exact_support_preserved": 600
+  },
+  "stage3_ring": {
+    "instances": 300,
+    "mandatory_instances": 26,
+    "exact_global_q1": 26,
+    "safe_certified_mandatory": 7,
+    "interpretation": "exact mechanism coverage and current relaxation certificate coverage are different quantities"
+  },
+  "scope": "frozen synthetic exact-small corpora, mostly n <= 12",
+  "nonclaims": [
+    "not a universal q1 theorem",
+    "not a large-n complexity bound",
+    "not a population prevalence estimate"
+  ]
+}

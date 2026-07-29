@@ -1,0 +1,18 @@
+{
+  "schema": "lin318-feasible-path-threshold-scan-public-v1",
+  "semantics": "feasible_path_safe_lower_not_exact_kappa",
+  "candidate_count": 512,
+  "verified_closure_witness_count": 512,
+  "safe_threshold_crossing_count": 13,
+  "failed_or_unverified_count": 0,
+  "declared_baseline_cycle_lower_bound": 42231,
+  "best_safe_gain_lower": 47,
+  "best_edge_zero_based": [
+    15,
+    26
+  ],
+  "exact_kappa_computed": false,
+  "retained_witness_count": 45,
+  "retained_witness_policy": "all 13 safe positives plus the 32 inconclusive rows used by the published anchored probe",
+  "interpretation": "positive safe_gain_lower is sufficient conditional on the independently certified baseline value; nonpositive rows are inconclusive"
+}

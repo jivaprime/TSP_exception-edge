@@ -1,0 +1,1 @@
+instance_id,family,sampling_stratum,analysis_group,split,n,objective_mode,residual_type,optimum,optimal_q_set,optimal_q_min,q1_value,q1_minus_optimum,selected_tour,selected_exception_edges,hull_size,interior_count,onion_depth,onion_mass
