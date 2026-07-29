@@ -1,4 +1,4 @@
-﻿"edge_u","edge_v","closure_upper","safe_gain_lower","safe_kappa_lower","safe_threshold_crossed","raw_closure_cost","strict_final_cost","strict_gain","two_opt_moves","three_opt_moves","target_survives","tour_sha256"
+"edge_u","edge_v","closure_upper","safe_gain_lower","safe_kappa_lower","safe_threshold_crossed","raw_closure_cost","strict_final_cost","strict_gain","two_opt_moves","three_opt_moves","target_survives","tour_sha256"
 "4","106","42228","3.0","1.0136986301369864","True","42228","42125","103","4","1","False","121c9b1eb43674c083122328fd524de8cb480f034fb02f0cef6ed5820900cc6c"
 "4","110","42207","24.0","1.1283422459893049","True","42207","42172","35","3","0","True","caac60f3928386ae50924cef5023fa2de7bed33704245ed60c97eb2e6978e0e2"
 "13","115","42198","33.0","1.1493212669683257","True","42198","42151","47","4","0","False","7fcd7a2c7c5f07a38713c95022a5ee6f707c4dbf3b598533ed668e0db0813ed0"

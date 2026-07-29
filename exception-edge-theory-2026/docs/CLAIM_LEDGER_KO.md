@@ -20,6 +20,8 @@
 
 | ID | 관찰 | 선택·표본 | 검증 수준 | 반례·한계 |
 |---|---|---|---|---|
+| E0a | Stage 1 일반 기하 CUT은 Delaunay 밖 reference edge 11개 중 2개를 reference two-crossing interface에 귀속했고, 독립 two-crossing 인증은 0개였다 | TSPLIB strict-core 10, 공식 reference tour를 봉인 뒤 사용 | reference-only sealed pilot | forced-edge recall 아님; 9개 미귀속, raw artifact는 compact release 밖 |
+| E0b | Stage 1B density CUT 92개 중 42개가 reference two-crossing이었지만, 전체 11개 reference exception과 잔여 9개의 density-CUT 귀속은 모두 0개였다 | 같은 10개 discovery 인스턴스 | exploratory sealed run | backbone 농축과 예외 생성 능력은 다름; 모집단 일반화 금지 |
 | E1 | Stage 2 raw mandatory 178건 중 177건이 \(q=1\) | 합성 exact-small, targeted Hoey 포함 | Held–Karp exact spectrum | 일반 Euclidean 모집단 비율로 외삽 금지; \(q=2\) 사례 1건 존재 |
 | E2 | natural core mandatory 51/51이 exact global·exclusive \(q=1\) | uniform 300 + structured mixture 300 | exact DP, 동결 holdout | \(n\le12\) 합성 표본 |
 | E3 | 위 51건 중 48건이 현재 1-tree 구간으로 안전 인증됨 | 같은 natural core | 충분 인증, 위반 0 | ring에서는 7/26으로 bound coverage가 낮음 |
@@ -27,7 +29,7 @@
 | E5 | LIN318 추가 후보 512개 중 13개가 safe lower positive | 988+512 봉인 후보영역 | 512/512 feasible witness 독립 검증 | exact \(\kappa\)·recall 아님; 499개는 미확정 |
 | E6 | closure seed와 순차 개입으로 42,210→42,118→42,108 | LIN318 한 인스턴스, 전수 scan 후 탐색 | deterministic reproduction | LKH seed 사용, holdout·동일예산 대조 없음, 최적 미도달 |
 
-관찰 E1–E6은 정리 T1–T8로 승격하지 않는다.
+관찰 E0a–E6은 정리 T1–T8로 승격하지 않는다.
 
 ## 3. 다음 검증 대상 가설
 

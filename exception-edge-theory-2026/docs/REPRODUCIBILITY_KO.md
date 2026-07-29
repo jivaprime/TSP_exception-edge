@@ -7,8 +7,9 @@
 - SciPy 1.14 이상
 
 검증에 사용한 Windows/Python 3.13 top-level 버전은
-`requirements-lock.txt`에 기록했다. lock은 top-level 패키지 버전을
-고정하지만 운영체제별 wheel의 byte hash까지 고정한 것은 아니다.
+`requirements-verified.txt`에 기록했다. 이는 검증 실행의 top-level
+패키지 버전 기록이며, 전이 의존성이나 운영체제별 wheel의 byte hash까지
+고정하는 완전한 lockfile은 아니다.
 
 ```bash
 python -m venv .venv
@@ -17,6 +18,10 @@ python -m venv .venv
 # Linux/macOS
 .venv/bin/python -m pip install -r requirements.txt
 ```
+
+`.venv`, `.pytest_cache`, `audit_output`, `reproduction_output` 같은 실행
+환경·재생성 출력은 공개 artifact 체크섬 집합에서 제외된다. 따라서 위와
+같이 release root 안에 가상환경을 만들어도 감사 membership은 변하지 않는다.
 
 Colab에서는 별도 `venv`를 만들 필요가 없다. 런타임 Python에 직접
 의존성을 설치하고 이 폴더를 작업 디렉터리로 두는 편이 단순하다.
@@ -31,13 +36,14 @@ python verify_public_results.py
 
 1. weak 후보 988개, target 후보 1,500개, 차집합 512개
 2. target CSV의 봉인 SHA-256
-3. `static_local_b512`와 `static_nearest_b512` snapshot의 동일성
-4. 봉인 2-factor에서 \(T_0=42{,}210\) 재구성
-5. 512행의 closure/path/gain/\(\kappa\) 산술
-6. verified witness 512, safe lower positive 13
-7. 공개 tour 네 개의 Hamiltonicity, candidate membership, 비용
-8. weak-Delaunay 제한 하한·상한 42,231의 일치
-9. optimum tour를 읽지 않았다는 실행 계약
+3. compact archive의 7개 멤버·크기·해시와 의도적 중복 1건
+4. `static_local_b512`와 `static_nearest_b512` snapshot의 동일성
+5. 봉인 2-factor에서 \(T_0=42{,}210\) 재구성
+6. 512행의 closure/path/gain/\(\kappa\) 산술
+7. verified witness 512, safe lower positive 13
+8. 공개 tour 네 개의 Hamiltonicity, candidate membership, 비용
+9. weak-Delaunay 제한 하한·상한 42,231의 일치
+10. optimum tour를 읽지 않았다는 실행 계약
 
 ## 3. 전체 basin 재현
 
@@ -82,6 +88,14 @@ python -m unittest discover -s tests -v
 LKH 호출 테스트는 mock tour를 사용한다. 공개 test suite 자체는 LKH
 binary를 요구하지 않는다.
 
+### 4.1 exact-small 재현 범위
+
+공개본은 Stage 2·3의 core exact oracle, 안전구간 구현, 합성 fixture와
+동결 summary 감사를 제공한다. 541/600개 corpus 전체를 처음부터 생성한
+study driver·generator·config와 대형 pair 원자료는 compact release에서
+제외했다. 따라서 공개 명령은 headline summary의 무결성과 core 계산을
+검증하지만, 전체 corpus 생성 run을 재수행하지는 않는다.
+
 ## 5. 공개 폴더 구조
 
 ```text
@@ -91,7 +105,7 @@ exception-edge-theory-2026/
 ├── LICENSE
 ├── CITATION.cff
 ├── requirements.txt
-├── requirements-lock.txt
+├── requirements-verified.txt
 ├── verify_public_results.py
 ├── run_lin318_threshold_basin.py
 ├── docs/
@@ -103,6 +117,12 @@ exception-edge-theory-2026/
 └── results/
     ├── exact_small/
     └── lin318/
+        ├── README.md
+        ├── negative_controls/
+        ├── closure_scan/
+        ├── restricted_baseline/
+        ├── basin/
+        └── tours/
 ```
 
 ## 6. compact LIN318 bundle
@@ -116,7 +136,9 @@ exception-edge-theory-2026/
 4. static-shortest-b512의 봉인된 2-factor MILP audit JSON
 
 nearest snapshot 두 항목은 재현에 필수는 아니지만 local snapshot과
-동일했다는 사실을 공개 감사하기 위해 포함했다.
+동일했다는 사실을 공개 감사하기 위해 포함했다. manifest의
+`duplicate_of`와 `retained_reason`이 이 의도적 중복을 명시하며,
+감사 코드는 두 payload의 byte 동일성을 재검증한다.
 
 ## 7. raw scan의 재실행
 

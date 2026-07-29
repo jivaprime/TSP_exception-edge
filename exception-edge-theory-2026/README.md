@@ -91,6 +91,14 @@ sealed candidate snapshots and saved 2-factor needed for reproduction.
 Large intermediate files, repeated quick runs, LKH work directories, the LKH
 binary, and the TSPLIB source instance are deliberately excluded.
 
+The exact-small code in this compact release covers the core oracle,
+safe-bound implementation, fixtures, and frozen-summary audit. The study
+drivers, generators, configs, and large pair tables used to generate the full
+541/600-instance Stage 2/3 corpora are not included, so this is not a
+from-scratch corpus regeneration package. Earlier Stage 1 CUT and Stage 1B
+density-CUT negative results are summarized in the results document, while
+their raw artifacts and drivers remain outside this compact release.
+
 ## Non-claims
 
 This release does not claim a polynomial-time TSP algorithm, resolution of

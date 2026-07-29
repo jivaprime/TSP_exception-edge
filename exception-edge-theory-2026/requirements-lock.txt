@@ -1,3 +1,0 @@
-# Exact top-level versions used for the verified Windows/Python 3.13 run.
-numpy==2.4.4
-scipy==1.17.1

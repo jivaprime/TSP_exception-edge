@@ -96,7 +96,7 @@ python verify_public_results.py --full
 
 - 통합 이론과 핵심 정리의 증명 해설
 - exact closure·1-tree 안전구간·SEC-MILP·LIN318 개입 코드
-- 29개 공개 테스트(환경에 따라 테스트 수는 이후 늘어날 수 있음)
+- 30개 공개 테스트(환경에 따라 테스트 수는 이후 늘어날 수 있음)
 - exact-small 요약표와 그림
 - LIN318 512행 스캔표, 재현에 필요한 45개 witness, 대표 투어
 - weak-Delaunay 제한값 42,231의 하한·상한 일치 근거
@@ -109,6 +109,13 @@ python verify_public_results.py --full
 - 수정 중이던 Colab 노트북
 - LKH 실행파일과 TSPLIB 원본
 - 다른 연구 주제와 개인 분석 자료
+
+Stage 2·3의 공개 코드는 core oracle과 안전구간·테스트에 집중한다.
+541/600개 exact-small corpus를 처음부터 생성한 study
+driver·generator·config와 대형 pair 원자료는 포함하지 않으며, 공개
+감사는 동결 summary와 core 계산을 검증한다. 앞선 Stage 1 CUT 및 Stage
+1B density-CUT의 음성 결과는 [결과 문서](docs/RESULTS_KO.md)에
+요약하되, 그 원자료와 실행 코드는 compact release 범위에서 제외했다.
 
 ## 이 연구가 주장하지 않는 것
 

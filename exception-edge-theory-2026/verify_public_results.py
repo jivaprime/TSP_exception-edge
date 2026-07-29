@@ -29,6 +29,7 @@ from run_lin318_threshold_basin import run_lin318_threshold_basin
 ROOT = Path(__file__).resolve().parent
 CHECKSUMS = ROOT / "checksums.sha256"
 ARCHIVE = ROOT / "data" / "lin318_reproduction_inputs.zip"
+ARCHIVE_MANIFEST = ROOT / "data" / "lin318_reproduction_manifest.json"
 SCAN_DIR = ROOT / "results" / "lin318" / "closure_scan"
 TOUR_DIR = ROOT / "results" / "lin318" / "tours"
 RESTRICTED_BOUNDS = (
@@ -38,7 +39,13 @@ RESTRICTED_BOUNDS = (
     / "restricted_baseline"
     / "restricted_bounds.csv"
 )
-PILOT_SUMMARY = ROOT / "results" / "lin318" / "zero_base_pilot_summary.csv"
+PILOT_SUMMARY = (
+    ROOT
+    / "results"
+    / "lin318"
+    / "negative_controls"
+    / "zero_base_pilot_summary.csv"
+)
 STAGE2_FAMILY = (
     ROOT
     / "results"
@@ -71,6 +78,16 @@ EXPECTED_ADDED_COUNT = 512
 EXPECTED_SAFE_COUNT = 13
 EXPECTED_RETAINED_WITNESSES = 45
 EXPECTED_BASELINE_VALUE = 42_231
+RUNTIME_EXCLUDED_DIRS = frozenset(
+    {
+        ".git",
+        ".venv",
+        ".pytest_cache",
+        "__pycache__",
+        "audit_output",
+        "reproduction_output",
+    }
+)
 
 
 def _sha256(payload: bytes) -> str:
@@ -108,14 +125,14 @@ def _audit_release_checksums() -> int:
             raise RuntimeError(f"duplicate checksum entry: {relative}")
         expected[relative] = digest
 
-    actual_files = {
-        path.relative_to(ROOT).as_posix()
-        for path in ROOT.rglob("*")
-        if path.is_file()
-        and path != CHECKSUMS
-        and "__pycache__" not in path.parts
-        and path.suffix != ".pyc"
-    }
+    actual_files: set[str] = set()
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or path == CHECKSUMS or path.suffix == ".pyc":
+            continue
+        relative_path = path.relative_to(ROOT)
+        if any(part in RUNTIME_EXCLUDED_DIRS for part in relative_path.parts):
+            continue
+        actual_files.add(relative_path.as_posix())
     if actual_files != set(expected):
         missing = sorted(actual_files - set(expected))
         stale = sorted(set(expected) - actual_files)
@@ -129,8 +146,60 @@ def _audit_release_checksums() -> int:
     return len(expected)
 
 
+def _audit_reproduction_manifest() -> dict[str, int]:
+    manifest = json.loads(ARCHIVE_MANIFEST.read_text(encoding="utf-8"))
+    if manifest["archive"] != ARCHIVE.name:
+        raise RuntimeError("compact archive name does not match its manifest")
+
+    archive_payload = ARCHIVE.read_bytes()
+    if _sha256(archive_payload) != manifest["archive_sha256"]:
+        raise RuntimeError("compact archive hash does not match its manifest")
+
+    entries = manifest["members"]
+    indexed = {entry["path"]: entry for entry in entries}
+    if len(indexed) != len(entries):
+        raise RuntimeError("compact archive manifest contains duplicate paths")
+
+    with zipfile.ZipFile(ARCHIVE) as archive:
+        member_names = {
+            info.filename for info in archive.infolist() if not info.is_dir()
+        }
+        if member_names != set(indexed):
+            raise RuntimeError("compact archive membership does not match its manifest")
+
+        payloads: dict[str, bytes] = {}
+        for path, entry in indexed.items():
+            payload = archive.read(path)
+            payloads[path] = payload
+            if len(payload) != int(entry["bytes"]):
+                raise RuntimeError(f"compact archive byte count mismatch: {path}")
+            if _sha256(payload) != entry["sha256"]:
+                raise RuntimeError(f"compact archive member hash mismatch: {path}")
+
+    documented_duplicates = 0
+    for path, entry in indexed.items():
+        duplicate_of = entry.get("duplicate_of")
+        if duplicate_of is None:
+            continue
+        documented_duplicates += 1
+        if duplicate_of == path:
+            raise RuntimeError(f"archive member duplicates itself: {path}")
+        if duplicate_of not in indexed:
+            raise RuntimeError(f"unknown duplicate target: {duplicate_of}")
+        if not entry.get("retained_reason"):
+            raise RuntimeError(f"documented duplicate lacks a reason: {path}")
+        if payloads[path] != payloads[duplicate_of]:
+            raise RuntimeError(f"documented duplicate payloads differ: {path}")
+
+    return {
+        "members": len(entries),
+        "documented_duplicates": documented_duplicates,
+    }
+
+
 def audit_public_results(*, full: bool = False) -> dict[str, Any]:
     checksum_count = _audit_release_checksums()
+    archive_manifest = _audit_reproduction_manifest()
     with zipfile.ZipFile(ARCHIVE) as archive:
         weak_payload = archive.read(WEAK_MEMBER)
         target_payload = archive.read(TARGET_CANDIDATE_MEMBER)
@@ -332,6 +401,7 @@ def audit_public_results(*, full: bool = False) -> dict[str, Any]:
     return {
         "schema": "exception-edge-public-audit-v1",
         "release_checksums_verified": checksum_count,
+        "compact_archive_manifest": archive_manifest,
         "candidate_graph": {
             "weak_edges": len(weak_costs),
             "target_edges": len(target_costs),

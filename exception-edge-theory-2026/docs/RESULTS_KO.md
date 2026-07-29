@@ -15,6 +15,32 @@ exact-small에서는 관찰된 mandatory Delaunay 예외가 거의 모두
 이것은 구조적 메커니즘의 유력한 증거이지만, 완전성이나 독립 solver
 성능의 증거는 아니다.
 
+### 1.1 선행 탐색 단계의 음성 결과
+
+Stage 2·3에 앞서 50–150정점 TSPLIB strict-core 10을 대상으로
+reference-only CUT 파일럿을 수행했다. 하나씩 검증된 공식 최적투어에서
+Delaunay 밖 reference edge는 11개였고, outcome-blind 일반 기하 CUT은
+그중 2개를 reference two-crossing interface에 귀속했다
+(pooled 2/11=18.2%, instance-macro 21.4%). 280개 제안 CUT 중 reference
+tour가 실제로 두 번 교차한 비율은 55.4%였지만, 모든 최적투어의
+two-crossing을 독립 인증한 CUT은 0개였고 9개 edge가 미귀속으로 남았다.
+이 수치는 forced-edge recall이 아니라 하나의 reference tour에 대한
+구조 귀속률이다.
+
+후속 Stage 1B에서는 density hierarchy가 제안한 CUT 92개 중 42개가
+reference tour를 두 번 교차했지만, exact cross-\(k\) persistence와
+현재 two-crossing 충분인증은 각각 0개였다. 더 중요하게는 전체 11개
+Delaunay reference exception과 Stage 1 잔여 9개 모두에서 blind
+candidate contact, density-CUT 귀속, portal-edge 선택, pair 회수가
+각각 0개였다. 따라서 density-CUT은 일반적인 tour-contiguous backbone
+후보에는 신호가 있었지만 당시 예외간선 생성기로는 실패했다.
+
+이 두 단계는 후속 closure 이론으로 이동하게 만든 중요한 음성 증거다.
+현재 compact release에는 그 요약만 보존하며, raw artifact와 study
+driver는 포함하지 않는다. 이후 Stage 2·3의 \(q\)-closure 결과는 이
+실패를 숨긴 대체 수치가 아니라, 질문을 CUT 발견률에서 Hamiltonian
+closure 구조로 다시 정의한 별도 단계다.
+
 ## 2. Stage 2 — closure spectrum
 
 동결된 541개 좌표 인스턴스를 raw Euclidean과 `EUC_2D`로 분석했다.

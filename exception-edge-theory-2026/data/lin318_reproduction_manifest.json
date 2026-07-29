@@ -29,7 +29,9 @@
     {
       "path": "benchmark_pilot/runs/static_nearest_b512__r01/solver_output/candidate_edges/round_00.csv",
       "bytes": 42891,
-      "sha256": "aa75561a53100148eb69b45fef04bd690e5b0f7a0db9d8a573b85ecb1d3d4a69"
+      "sha256": "aa75561a53100148eb69b45fef04bd690e5b0f7a0db9d8a573b85ecb1d3d4a69",
+      "duplicate_of": "benchmark_pilot/runs/static_local_b512__r01/solver_output/candidate_edges/round_00.csv",
+      "retained_reason": "Preserves the original sealed static-nearest run path for the byte-identity audit."
     },
     {
       "path": "benchmark_pilot/runs/static_nearest_b512__r01/solver_output/blind_solver_seal.json",

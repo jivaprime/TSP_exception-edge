@@ -19,7 +19,7 @@
     "conditions": 15,
     "no_cycle_found": 15,
     "time_limit_seconds_per_main_condition": 60,
-    "summary_csv": "zero_base_pilot_summary.csv",
+    "summary_csv": "negative_controls/zero_base_pilot_summary.csv",
     "summary_csv_sha256": "262745ca5c5abfeecd6d5ba5d2064552d205818c4889cf1c5e72967d4b0c3dd8"
   },
   "restricted_baseline": {

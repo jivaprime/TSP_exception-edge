@@ -27,7 +27,10 @@ outputs, and local absolute paths were excluded.
 
 The archived `static_local_b512` and `static_nearest_b512` candidate CSV files
 are byte-identical. The public audit checks this explicitly; they must not be
-treated as independent candidate baselines.
+treated as independent candidate baselines. Both original member paths are
+retained because their blind seals belong to distinct recorded runs. The
+manifest marks the nearest CSV with `duplicate_of` and `retained_reason`, and
+the verifier confirms the two archived payloads are byte-identical.
 
 ## Compact archive
 
@@ -45,8 +48,9 @@ curated artifact whose hash is recorded in
 `data/lin318_reproduction_manifest.json`.
 
 The path-neutral `evaluation_pilot/benchmark_summary.csv` was retained as
-`results/lin318/zero_base_pilot_summary.csv` so the 15 `no_cycle_found`
-outcomes can be audited directly. Its SHA-256 is
+`results/lin318/negative_controls/zero_base_pilot_summary.csv` so the 15
+`no_cycle_found` outcomes can be audited directly without presenting the
+failed pilot as a primary solver result. Its SHA-256 is
 `262745ca5c5abfeecd6d5ba5d2064552d205818c4889cf1c5e72967d4b0c3dd8`.
 
 ## Forced-closure artifacts

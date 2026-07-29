@@ -1,4 +1,4 @@
-﻿"edge_u","edge_v","closure_upper","safe_gain_lower","safe_kappa_lower","safe_threshold_crossed","status","initial_cost","kicked_cost","locked_cost","final_cost","escape_gain","target_survives_final","move_kind","move_pattern","immediate_barrier","added_edges","removed_edges"
+"edge_u","edge_v","closure_upper","safe_gain_lower","safe_kappa_lower","safe_threshold_crossed","status","initial_cost","kicked_cost","locked_cost","final_cost","escape_gain","target_survives_final","move_kind","move_pattern","immediate_barrier","added_edges","removed_edges"
 "4","106","42228","3.0","1.0136986301369864","True","forced_relaxation","42118","42131","42131","42118","0","False","2opt","reverse_middle","13","[[3,110],[4,106]]","[[3,106],[4,110]]"
 "4","110","42207","24.0","1.1283422459893049","True","already_present","42118","","","42118","0","True","","","","[]","[]"
 "13","115","42198","33.0","1.1493212669683257","True","forced_relaxation","42118","42407","42407","42118","0","False","2opt","reverse_middle","289","[[12,114],[13,115]]","[[12,13],[114,115]]"

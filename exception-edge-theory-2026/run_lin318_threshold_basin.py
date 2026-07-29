@@ -987,7 +987,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "--colab-zip",
         required=True,
         type=Path,
-        help="lin318_zero_base_pilot_results.zip",
+        help="compact archive, e.g. data/lin318_reproduction_inputs.zip",
     )
     parser.add_argument(
         "--closure-scan",
